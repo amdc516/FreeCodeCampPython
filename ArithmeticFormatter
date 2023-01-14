@@ -1,0 +1,17 @@
+list_1 = ['223 + 1000', '0 - 1000','1 - 2']
+res_1 = list()
+res_2 = list()
+sol = list()
+dashes = list()
+for element in list_1:
+  spos = element.find(' ')
+  num_1 = element[:spos]
+  num_2 = element[spos+1:]
+  num_3 = int(num_1.replace(' ',''))+int(num_2.replace(' ',''))
+  res_1.append(num_1)
+  res_2.append(num_2)
+  sol.append(str(num_3))
+  dashes.append('-'*len(str(num_3)))
+final_list = [res_1, res_2, dashes, sol]
+for n in final_list:
+  print(('{:>6} '*len(list_1)).format(*n))
