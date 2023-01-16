@@ -1,0 +1,62 @@
+def add_time(start, duration, day = ''):
+
+  divider_s = start.find(':')
+  divider_d = duration.find(':')
+  minutes_start = int(start[divider_s+1:divider_s+3])
+  hour_start = int(start[:divider_s])
+  meridian = start[-2:]
+  minutes_duration = int(duration[divider_d+1:divider_d+3])
+  hour_duration = int(duration[:divider_d])
+  new_hour = hour_start + hour_duration
+  new_min = minutes_start + minutes_duration
+  
+  if new_min > 59:
+      new_hour = new_hour + 1
+      new_min = new_min - 60
+
+  new_min = str(new_min)
+
+  if meridian == 'PM':
+      new_hour = new_hour + 12
+
+  mensaje = ''
+
+
+  n = 0
+
+  if (new_hour >= 24 and new_hour < 48):
+    n = 1
+    mensaje = ' (next day)'
+  elif new_hour >= 48:
+    n = str(new_hour // 24)
+    mensaje = ' (' + n + ' days later)'
+  
+  quotient = new_hour // 12
+
+  if quotient % 2 == 0:
+    new_meridian = 'AM'
+  else:
+    new_meridian = 'PM'
+  
+  hour = new_hour % 12
+
+  if (int(new_min) // 10) < 1:
+    new_min = '0' + new_min
+
+  if hour == 0:
+    hour = 12
+
+  new_time = str(hour) + ':' + new_min + ' ' + new_meridian +  mensaje
+
+  if day != '':
+
+    input_day = day.lower()
+    days_week = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday']
+    index_day = days_week.index(input_day)
+    new_index = (index_day + int(n)) % 7
+    new_day = (days_week[new_index]).capitalize()
+  
+    new_time = str(hour) + ':' + new_min + ' ' + new_meridian + ', ' + new_day  +  mensaje 
+
+
+  return(new_time)
