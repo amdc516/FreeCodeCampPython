@@ -1,0 +1,85 @@
+class Rectangle:
+  def __init__(self, w, h):
+    self.width = w
+    self.height = h
+    
+  
+  def __str__(self):
+    return('Rectangle(width=' + str(self.width) + ', height=' + str(self.height) + ')' )
+
+  def set_width(self, new_w):
+    self.width = new_w
+
+  def set_height(self, new_h):
+    self.height = new_h
+
+  def get_area(self):
+    return(self.height*self.width)
+  
+  def get_perimeter(self):
+    return(self.height*2 + self.width*2)
+  
+  def get_diagonal(self):
+    return((self.width ** 2 + self.height ** 2) ** .5)
+  
+  def get_picture(self):
+    if ((self.width >50) or (self.height >50)):
+      return('Too big for picture.')
+    else:
+      return(('*' * (self.width) + '\n') * self.height)
+   
+  def get_amount_inside(self, rec):
+    same_1 = self.width // rec.width
+    same_2 = self.height // rec.height
+    diff_1 = self.width // rec.height
+    diff_2 = self.height // rec.width
+    
+    max_same = same_1 * same_2
+    max_diff = diff_1 * diff_2
+
+    return(max([max_same, max_diff]))
+
+class Square(Rectangle):  
+  def __init__(self, s):
+    self.width = s
+    self.height = s
+
+  def __str__(self):
+    return('Square(side=' + str(self.height) + ')' )
+
+  def set_width(self, s):
+    self.width = s
+    self.height = s
+
+  def set_height(self, s):
+    self.width = s
+    self.height = s
+
+  def set_side(self, new_s):
+    self.width = new_s
+    self.height = new_s
+    
+    max_same = same_1 * same_2
+    max_diff = diff_1 * diff_2
+
+    return(max([max_same, max_diff]))
+
+class Square(Rectangle):  
+  def __init__(self, s):
+    self.width = s
+    self.height = s
+
+  def __str__(self):
+    return('Square(side=' + str(self.height) + ')' )
+
+  def set_width(self, s):
+    self.width = s
+    self.height = s
+
+  def set_height(self, s):
+    self.width = s
+    self.height = s
+  
+  def set_side(self, new_s):
+    self.width = new_s
+    self.height = new_s
