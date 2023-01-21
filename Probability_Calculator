@@ -1,0 +1,51 @@
+import random
+import copy
+
+class Hat:
+  def __init__(self, **kwargs):
+    self.contents = list()
+    for colour in kwargs.keys():
+      (self.contents).extend([str(colour)]*kwargs[colour])
+
+  def draw(self, n):
+    contenidos = copy.copy(self.contents)
+    if n < len(contenidos):
+      i = 0
+      draw_list = list()
+      while i < n:
+        draw_n = random.choice(self.contents)
+        self.contents.remove(draw_n)
+        draw_list.append(draw_n)
+        i = i + 1
+      return(draw_list)
+    else:
+      self.contents=[]
+      return(contenidos)
+
+  def add_draw(self, list_add):
+    self.contents.extend(list_add)
+
+
+def experiment(hat, expected_balls, num_balls_drawn, num_experiments):
+  expected = list()
+  for colour in expected_balls.keys():
+    (expected).extend([str(colour)]*expected_balls[colour])
+
+  M = 0
+  N = 0
+  while N < num_experiments:
+    balls_drawn = hat.draw(num_balls_drawn)
+    hat.add_draw(balls_drawn)
+    if contiene(balls_drawn, expected):
+      M = M + 1
+    N = N + 1
+  return(M/N)
+
+def contiene(list1, list2): #si list1 contiene a list2
+  list_v = copy.copy(list1)
+  for e in list2:
+    if e in list_v:
+      list_v.remove(e)
+
+  R = ((len(list1) - len(list2))==len(list_v))
+  return(R)
