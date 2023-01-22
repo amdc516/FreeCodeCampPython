@@ -1,17 +1,46 @@
-list_1 = ['223 + 1000', '0 - 1000','1 - 2']
-res_1 = list()
-res_2 = list()
-sol = list()
-dashes = list()
-for element in list_1:
-  spos = element.find(' ')
-  num_1 = element[:spos]
-  num_2 = element[spos+1:]
-  num_3 = int(num_1.replace(' ',''))+int(num_2.replace(' ',''))
-  res_1.append(num_1)
-  res_2.append(num_2)
-  sol.append(str(num_3))
-  dashes.append('-'*len(str(num_3)))
-final_list = [res_1, res_2, dashes, sol]
-for n in final_list:
-  print(('{:>6} '*len(list_1)).format(*n))
+def arithmetic_arranger(problems, solve = 'False'):
+  res_1 = list()
+  res_2 = list()
+  sol = list()
+  dashes = list()
+  if len(problems) > 5:
+    return('Error: Too many problems.')
+  else: 
+    for element in problems:
+      spos = element.find(' ')
+      ok_op = element[spos+1:spos+2]
+      num_1 = element[:spos]
+      num_2 = element[spos+1:]
+
+      if ok_op not in ['+' , '-']: 
+        return('Error: Operator must be \'+\' or \'-\'.')
+      elif (num_1.isdigit() and num_2[2:].isdigit()) == False:
+        return('Error: Numbers must only contain digits.')
+      elif (len(num_1) > 4 or len(num_2[2:]) > 4):
+        return('Error: Numbers cannot be more than four digits.')
+      else: 
+        num_3 = int(num_1.replace(' ',''))+int(num_2.replace(' ',''))
+        res_1.append(num_1)
+        res_2.append(num_2)
+        sol.append(str(num_3))
+        dashes.append('-'*(max((len(num_1),len(num_2[2:])))+2))
+      
+  line_1 = ''
+  line_2 = '\n'
+  line_3 = '\n'
+  line_4 = '\n'
+  i = 0
+  while i < len(res_1):
+    line_1 += ' '*(len(dashes[i])-len(res_1[i])) + res_1[i] + ' '*4
+    line_2 += res_2[i][0] + ' '*(len(dashes[i]) - 1 - len(res_2[i][2:])) + res_2[i][2:] + ' '*4
+    line_3 += dashes[i] + ' '*4
+    line_4 += ' '*(len(dashes[i]) - len(sol[i])) + sol[i] + ' '*4
+    i = i + 1
+  line_1 = line_1[:-4]
+  line_2 = line_2[:-4]
+  line_3 = line_3[:-4]
+  line_4 = line_4[:-4]
+  if solve == True:
+    return(line_1 + line_2 + line_3 + line_4)
+  else:
+    return(line_1 + line_2 + line_3)
